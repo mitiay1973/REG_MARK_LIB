@@ -193,7 +193,7 @@ namespace REG_MARK_LIB
                                         S1 = Seria[i + 1];
                                     }
                                 }
-                                return S1 + "001" + mark[4] + mark[5] + reg;
+                                return S1 + "001" + Seria[0] + Seria[0] + reg;
                             }
                         }
                     }
@@ -248,6 +248,23 @@ namespace REG_MARK_LIB
                             }
                         }
                     }
+                    if (mark[0] != Seria[11])
+                    {
+                        if (mark[4] != Seria[11])
+                        {
+                            if (mark[5] == Seria[11])
+                            {
+                                for (int i = 0; i < 11; i++)
+                                {
+                                    if (mark[4] == Seria[i])
+                                    {
+                                        S2 = Seria[i + 1];
+                                    }
+                                }
+                                return mark[0] + "001" +S2 + Seria[0] + reg;
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -270,6 +287,31 @@ namespace REG_MARK_LIB
             }
             return "";
             }
+        public string GetNextMarkAfterInRange(string prevMark, string rangeStart, string rangeEnd)
+        {
+            string[] nomera = new string[1726272] ;
+            for (int i = 0; i < 1726272; i++)
+            {
+                if (i == 0)
+                {
+                    nomera[i] = rangeStart;
+                }
+                if (i != 0)
+                {
+                    if (nomera[i - 1] != rangeEnd)
+                    {
+                        nomera[i] = GetNextMarkAfter(nomera[i - 1]);
+                        string t = nomera[i];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+           
+            return "out of stock";
         }
-    }
+    }      
+}
 
